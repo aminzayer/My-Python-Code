@@ -2,7 +2,7 @@
 import os
 
 # Folder Path
-path = "/home/aminzayer/Mygit/My-Python-Code/Short-Codes/"
+path = "Your Path"
 
 # Change the directory
 os.chdir(path)
