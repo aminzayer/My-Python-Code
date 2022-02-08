@@ -1,10 +1,7 @@
-import pandas as pd
-import numpy as np
 import urllib
 from fake_useragent import UserAgent
 import requests
 import re
-from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 keyword = "Amin Zayeromali"
