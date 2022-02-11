@@ -1,19 +1,17 @@
 # Import libraries
+import re
 import requests
 from bs4 import BeautifulSoup
 
-page = requests.get('https://medium.com/@amin.zayeromali/about')
+page = requests.get('https://medium.com/@amin.zayeromali')
 
 # Create a BeautifulSoup object
 soup = BeautifulSoup(page.content, 'html.parser')
 
 #print(soup)
 # Pull all text from the BodyText div
-Author_name = soup.find_all(
-    "h2")
+Author_Followers = soup.find("button").getText()
+Author_Stories = soup.find_all("article")
 
-# Author_Followers = soup.find_all(
-#   "button", class_="ca cb bl bm bn bo bp bq br bs cc cd bv ce cf")
-
-print(Author_name)
-#print(Author_Followers)
+print(Author_Followers)
+print(len(Author_Stories))
