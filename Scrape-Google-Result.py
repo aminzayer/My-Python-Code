@@ -8,9 +8,7 @@ keyword = "Amin Zayeromali"
 html_keyword = urllib.parse.quote_plus(keyword)
 print(html_keyword)
 
-number_of_result = 20
-google_url = "https://www.google.com/search?q=" + \
-    html_keyword + "&num=" + str(number_of_result)
+google_url = "https://www.google.com/search?q=" + html_keyword 
 print(google_url)
 
 ua = UserAgent()
@@ -22,5 +20,6 @@ results = [re.search('\/url\?q\=(.*)\&sa', str(i.find('a', href=True)['href']))
            for i in result if "url" in str(i)]
 #this is because in rare cases we can't get the urls
 links = [i.group(1) for i in results if i != None]
-print(links)
+#print(links)
 
+print(soup.prettify())
