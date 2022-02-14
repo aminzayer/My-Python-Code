@@ -94,7 +94,7 @@ class Book():
         return f"{self.title} written by {self.author}"
     
     def __len__(self):
-        return 99
+        return self.pages
 
 mybook = Book('Python','Amin Zayer',120)
 print(mybook)
