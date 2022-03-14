@@ -31,5 +31,13 @@
 # Input: path = "/home//foo/"
 # Output: "/home/foo"
 # Explanation: In the canonical path, multiple consecutive slashes are replaced by a single one.
-
+class Solution:
+    def simplifyPath(self, path):
+        stack, tokens = [], path.split("/")
+        for token in tokens:
+            if token == ".." and stack:
+                stack.pop()
+            elif token != ".." and token != "." and token:
+                stack.append(token)
+        return "/" + "/".join(stack)
  
