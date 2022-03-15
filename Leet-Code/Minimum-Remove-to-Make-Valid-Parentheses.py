@@ -27,5 +27,26 @@
 # Input: s = "))(("
 # Output: ""
 # Explanation: An empty string is also valid.
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        st = []
+        s = list(s)
+        for i in range(len(s)):
+            c = s[i]
+            if c == '(':
+                st.append(i)
+            elif c == ')':
+                if len(st) == 0:
+                    s[i] = '*'
+                else:
+                    st.pop()
 
+        while len(st):
+            s[st[-1]] = '*'
+            st.pop()
+        res = ''
+        for c in s:
+            if c != '*':
+                res += c
+        return res
  
