@@ -48,3 +48,15 @@ class Solution(object):
         return False
 
 # Solution 2
+
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:
+        answer = True
+
+        check_set = set(nums) & set([target])
+
+        if check_set == set():
+            answer = False
+
+        return answer
