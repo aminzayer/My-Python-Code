@@ -1,20 +1,9 @@
-from wsgiref import headers
+from bs4 import BeautifulSoup
 import grequests
 from fake_useragent import UserAgent
 
-urls = ['https://pubmed.ncbi.nlm.nih.gov/31456179/',
-        'https://pubmed.ncbi.nlm.nih.gov/20521754/',
-        'https://pubmed.ncbi.nlm.nih.gov/29284222/',
-        'https://pubmed.ncbi.nlm.nih.gov/15894099/',
-        'https://pubmed.ncbi.nlm.nih.gov/28298516/',
-        'https://pubmed.ncbi.nlm.nih.gov/24283956/',
-        'https://pubmed.ncbi.nlm.nih.gov/30005774/',
-        'https://pubmed.ncbi.nlm.nih.gov/28260181/',
-        'https://pubmed.ncbi.nlm.nih.gov/26580154/',
-        'https://pubmed.ncbi.nlm.nih.gov/28862198/',
-        'https://pubmed.ncbi.nlm.nih.gov/26059925/',
-        'https://pubmed.ncbi.nlm.nih.gov/28395765/',
-        'https://pubmed.ncbi.nlm.nih.gov/21969133/', ]
+urls = ['https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5396460/',
+         ]
 
 def main():
     async_list = []
@@ -30,8 +19,13 @@ def main():
 
 
 def handleresponse(response, **kwargs):
-    print(response.content, kwargs)
-
+    articles = BeautifulSoup(response.text, 'html.parser')
+    heading_title = articles.find_all(
+        'h1', class_='content-title')[0].get_text()
+    print(heading_title + "\n")
+    date_pubed = articles.find(
+        "meta", attrs={'name': 'citation_publication_date'})['content']
+    print(date_pubed)
 
 if __name__ == '__main__':
     main()
