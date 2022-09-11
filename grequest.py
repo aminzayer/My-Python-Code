@@ -40,3 +40,5 @@ urlsdata=get_data_urls(urls)
 
 for urldata in urlsdata:
     print(urldata+"\n")
+
+
