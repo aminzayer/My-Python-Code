@@ -28,7 +28,7 @@ def Handel_Response_Fetcheing(response, **kwargs):
     heading_title = " ".join(heading_title.split())
     #clean_text = " ".join(articles.getText().split())
     date_article = find_date(str(response.content), extensive_search=True,
-                             original_date=True, outputformat='%Y-%m-%d')
+                             original_date=True, outputformat='%m/%d/%Y')
     date_float = datetime.datetime.timestamp(
         datetime.datetime.strptime(date_article, '%Y-%m-%d'))
     print("\n")
