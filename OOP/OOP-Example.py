@@ -92,10 +92,110 @@ class Book():
     # Print Sepecial Methode
     def __str__(self):
         return f"{self.title} written by {self.author}"
-    
+
     def __len__(self):
         return self.pages
 
 mybook = Book('Python','Amin Zayer',120)
 print(mybook)
 print(len(mybook))
+
+
+# Abstraction example
+class Shape:
+
+    def area(self):
+        pass
+
+
+class Rectangle(Shape):
+
+    def area(self, width, height):
+        return width * height
+
+
+# Encapsulation example
+class Car:
+
+    def __init__(self):
+        self.__speed = 0  # Private attribute
+
+    def accelerate(self):
+        self.__speed += 10
+
+    def get_speed(self):
+        return self.__speed
+
+
+my_car = Car()
+my_car.accelerate()
+print(my_car.get_speed())  # Output: 10
+
+
+# Polymorphism example
+class Animal:
+
+    def sound(self):
+        pass
+
+
+class Dog(Animal):
+
+    def sound(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def sound(self):
+        return "Meow!"
+
+
+def make_sound(animal):
+    return animal.sound()
+
+
+dog = Dog()
+cat = Cat()
+
+print(make_sound(dog))  # Output: Woof!
+print(make_sound(cat))  # Output: Meow!
+
+
+# Inheritance example
+class Animal:
+
+    def sound(self):
+        pass
+
+
+class Dog(Animal):
+
+    def sound(self):
+        return "Woof!"
+
+
+class Cat(Animal):
+
+    def sound(self):
+        return "Meow!"
+
+
+# Composition example
+class Engine:
+
+    def start(self):
+        return "Engine started."
+
+
+class Car:
+
+    def __init__(self):
+        self.engine = Engine()
+
+    def start(self):
+        return self.engine.start()
+
+
+my_car = Car()
+print(my_car.start())  # Output: Engine started.
