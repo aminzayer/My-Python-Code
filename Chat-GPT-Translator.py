@@ -1,7 +1,7 @@
 import openai
 
 
-def translate_and_correct(text, target_language):
+def correct_and_translate(text, target_language):
     api_key = "your_api_key_here"
 
     # Correct spelling using GPT-3
@@ -19,5 +19,5 @@ def translate_and_correct(text, target_language):
 text_to_translate = "can men get breast cancer?"
 target_language = "Spanish"
 
-corrected_translation = translate_and_correct(text_to_translate, target_language)
+corrected_translation = correct_and_translate(text_to_translate, target_language)
 print(corrected_translation)
