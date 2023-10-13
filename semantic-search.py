@@ -3,25 +3,27 @@ import torch
 
 
 def find_top_similar_sentences(queries, corpus, model_name='all-MiniLM-L6-v2', top_k=5):
-    # Load the sentence embedding model
-    embedder = SentenceTransformer(model_name)
+    """
+    Find the top similar sentences for a list of queries in a corpus.
 
-    # Encode the corpus sentences
+    Args:
+        queries (list): List of query sentences.
+        corpus (list): List of sentences in the corpus.
+        model_name (str): Name of the sentence embedding model.
+        top_k (int): Number of top similar sentences to retrieve.
+
+    Returns:
+        list: A list of tuples, each containing the query sentence and a list of top similar sentences.
+    """
+    embedder = SentenceTransformer(model_name)
     corpus_embeddings = embedder.encode(corpus, convert_to_tensor=True)
 
-    # Find the closest k sentences in the corpus for each query sentence based on cosine similarity
     results = []
     for query in queries:
         query_embedding = embedder.encode(query, convert_to_tensor=True)
-
-        # Calculate cosine similarities and retrieve top_k results
         cos_scores = util.cos_sim(query_embedding, corpus_embeddings)[0]
         top_results = torch.topk(cos_scores, k=min(top_k, len(corpus)))
-
-        # Store the results
-        query_results = []
-        for score, idx in zip(top_results[0], top_results[1]):
-            query_results.append((corpus[idx], score.item()))
+        query_results = [(corpus[idx], score.item()) for score, idx in zip(top_results[0], top_results[1])]
         results.append((query, query_results))
 
     return results
