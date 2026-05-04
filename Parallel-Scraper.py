@@ -13,8 +13,13 @@ def Parallel_Fetching_Link_Data(urls):
     # Pubmed link data structure
     LinksData = {'Error': 'OK', 'title': '', 'abstract': '', 'PostedDate': ''}
     Url_list = []
+
+    # Bolt: Instantiate UserAgent once outside the loop.
+    # UserAgent() parses a large JSON file and takes ~0.6s per call,
+    # so doing it in the loop is a major performance bottleneck.
+    ua = UserAgent()
+
     for url in urls:
-        ua = UserAgent()
         url_data_response = grequests.get(
             url, headers={"User-Agent": ua.random}, hooks={'response': Handel_Response_Fetcheing})
         Url_list.append(url_data_response)
