@@ -8,8 +8,12 @@ urls = ['https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5396460/',
 def main():
     async_list = []
 
+    # Bolt: Instantiate UserAgent once outside the loop.
+    # UserAgent() parses a large JSON file and takes ~0.6s per call,
+    # so doing it in the loop is a major performance bottleneck.
+    ua = UserAgent()
+
     for site in urls:
-        ua = UserAgent()
         action_item = grequests.get(
             site, headers={"User-Agent": ua.random}, hooks={'response': handleresponse})
         async_list.append(action_item)
